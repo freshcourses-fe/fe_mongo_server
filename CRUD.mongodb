@@ -1,0 +1,24 @@
+// для подключения к конкретной БД в вскоде:
+// расширение MongoDB for VS Code
+// подключайтесть по connection string
+// mongodb://<hostname>:<port>/<db_name>
+// например mongodb://localhost:27017/trainingDB
+
+// вставляем множество каточек, если коллекции нет то она создастся
+db.creditCards.insertMany([{cvv: 234}, {cvv:324}]);
+
+// ищем все у кого cvv >= 300
+db.creditCards.find({cvv: {$gte: 300}})
+
+// ищем все у кого есть поле holder
+db.creditCards.find({holder: {$exists: true}})
+
+// обновляем всех у кого нет поля holder
+// в свойстве set указываем все поля и значения которые в них надо записать
+db.creditCards.updateMany({holder: {$exists: false}},{$set: {holder: "Unknown User"}})
+
+// удаляет по фильтрации, если на даем фильтр то всех
+db.creditCards.deleteMany() 
+
+// дропаем таблицу
+db.creditCards.drop() 
